@@ -1,0 +1,57 @@
+<html>
+<head>
+	<title>First Cube with Three.js</title>
+	<style>
+		body {margin: 0;}
+		canvas {width: 100%; height: 100%;}
+	</style>
+</head>
+
+<body>
+<script src="js/three.js"></script>
+
+<script>
+	
+	<!--Always prefer to have window related setting at one place.. Reduces time and less erros as you have to change it at one location-->
+	var renderAreaWidth = 500;
+	var renderAreaHeight = 500;
+
+	<!-- Creating the scene -->
+	var scene = new THREE.Scene();
+
+	<!--Creating the camera-->
+	<!--FOV (field of View), Aspect ratio, Near plane and the far plane-->
+	var camera = new THREE.PerspectiveCamera(
+		75, renderAreaWidth/renderAreaHeight, 0.1, 100 );
+	
+	<!--Creating Renderer-->
+	var renderer = new THREE.WebGLRenderer();
+	renderer.setSize(renderAreaWidth, renderAreaHeight);
+
+	document.body.appendChild(renderer.domElement);
+
+	<!--Creating the geometry-->
+	<!--Setting box settings-->
+	var geometry = new THREE.BoxGeometry (1, 1, 1);
+	
+	<!--setting the material-->
+	<!--Setting the color to Green Color-->
+	var material = new THREE.MeshBasicMaterial({color: 0x00ff00});
+
+	<!--Creating the mesh that uses the geometry and applies the material settings-->
+	<!--This will get us the green cube-->
+	var cube = new THREE.Mesh(geometry, material);
+
+	<!--Now that the object is created we add it to the scence.-->
+	scene.add( cube );
+
+	<!--Everything is drawn to the center of the screen so, in our case, object cube and the camera will be in the same position.. In order to see the object we are just going to move the camera a bit behind-->
+	camera.position.z = 5;
+
+	<!--This is drawing and will make us happy \o/, though we are drawing cube but without rotation we will be looking at just one face of the cube and hence will apear as a square -->
+	renderer.render(scene, camera);
+	
+</script>
+
+</body>
+</html>
